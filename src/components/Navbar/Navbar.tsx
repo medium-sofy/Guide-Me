@@ -1,6 +1,19 @@
 import React from 'react';
+import { Flex, Image} from '@chakra-ui/react';
+import SearchInput from './SearchInput';
 
 const Navbar:React.FC = () => {
-    return <div>Navbar</div>
+    return (
+        <Flex bg="white" height="44px" padding="6px 12px">
+            <Flex alignItems="center">
+                <Image src="/images/redditFace.svg" height="30px"/>
+                <Image src="/images/redditText.svg" height="46px" display={{ base: "none", md: "unset"}}/>
+            </Flex>
+            <SearchInput/>
+            {/* <Directory/>            
+            <RightContent/> */}
+        </Flex>
+        
+    )
 }
 export default Navbar;
