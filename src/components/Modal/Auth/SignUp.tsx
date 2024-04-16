@@ -1,18 +1,34 @@
-import { authModalState } from '@/atoms/authModalAtom';
-import { Button, Flex, Input, Text } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { authModalState } from "@/atoms/authModalAtom";
+import { Button, Flex, Input, Text } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { auth } from "../../../firebase/clientApp";
+import { FIREBASE_ERRORS  } from "../../../firebase/errors";
 
-const SignUp:React.FC = () => {
-  
+const SignUp: React.FC = () => {
   const setAuthModalState = useSetRecoilState(authModalState);
   const [signUpForm, setSignUpForm] = useState({
     email: "",
     password: "",
     confirmPassword: "",
   });
+
+  const [error, setError] = useState("");
+
+  const [createUserWithEmailAndPassword, user, loading, userError] =
+    useCreateUserWithEmailAndPassword(auth);
+
   // Firebase logic
-  const onSubmit = () => {};
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (error) setError("");
+    if (signUpForm.password !== signUpForm.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+    createUserWithEmailAndPassword(signUpForm.email, signUpForm.password);
+  };
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     //update form state
     setSignUpForm((prev) => ({
@@ -68,7 +84,7 @@ const SignUp:React.FC = () => {
         bg="gray.50"
       />
 
-<Input
+      <Input
         name="confirmPassword"
         placeholder="confirm password"
         type="password"
@@ -89,9 +105,21 @@ const SignUp:React.FC = () => {
           borderColor: "blue.500",
         }}
         bg="gray.50"
-      /> 
-
-      <Button width="100%" height="36px" mb={2} mt={2} type="submit">
+      />
+      {/* Don't show an error unless there is an error */}
+      
+        <Text textAlign="center" color="red" fontSize="10pt">
+          {error || FIREBASE_ERRORS[userError?.message as keyof typeof FIREBASE_ERRORS]}
+        </Text>
+  
+      <Button
+        width="100%"
+        height="36px"
+        mb={2}
+        mt={2}
+        type="submit"
+        isLoading={loading}
+      >
         Sign Up
       </Button>
 
@@ -112,5 +140,6 @@ const SignUp:React.FC = () => {
         </Text>
       </Flex>
     </form>
-  );}
+  );
+};
 export default SignUp;
