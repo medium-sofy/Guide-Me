@@ -82,7 +82,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
         const communityDoc = await transaction.get(communityDocRef);
 
         if (communityDoc.exists()) {
-          throw new Error("Sorry, c/${communityName} is taken, Try another.");
+          throw new Error(`Sorry, c/${communityName} is taken, Try another.`);
         }
         // create community
         transaction.set(communityDocRef, {
@@ -100,11 +100,13 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
           }
         );
       });
+
     } catch (error: any) {
       console.log("handleCreateCommunity error ", error);
       setError(error.message);
     }
     setLoading(false);
+    open = false
   };
 
   return (
