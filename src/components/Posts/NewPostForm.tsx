@@ -1,4 +1,12 @@
-import { Alert, AlertDescription, AlertIcon, AlertTitle, Text,  Flex, Icon } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  Text,
+  Flex,
+  Icon,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 import { IoDocumentText, IoImageOutline } from "react-icons/io5";
 import TabItem from "./TabItem";
@@ -8,7 +16,13 @@ import ImageUpload from "./PostForm/ImageUpload";
 import { Post } from "@/atoms/postsAtom";
 import { User } from "firebase/auth";
 import { useRouter } from "next/router";
-import { Timestamp, addDoc, collection, serverTimestamp, updateDoc } from "firebase/firestore";
+import {
+  Timestamp,
+  addDoc,
+  collection,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
 import { firestore, storage } from "@/firebase/clientApp";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 
@@ -42,7 +56,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
   });
   const [selectedFile, setSelectedFile] = useState<string>();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
   const handleCreatePost = async () => {
     const { communityId } = router.query;
     // create new post object => type post
@@ -57,29 +71,28 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
       createdAt: serverTimestamp() as Timestamp,
     };
 
-   
-    setLoading(true)
+    setLoading(true);
     try {
-       // store the post on db
-      const postDocRef = await addDoc(collection(firestore, 'posts'), newPost)      
+      // store the post on db
+      const postDocRef = await addDoc(collection(firestore, "posts"), newPost);
       // check for selected file
-      if(selectedFile){
-         // store in storage => getDownloadURL (return imageURL)
-        const imageRef = ref(storage, `posts/${postDocRef.id}/image`)
-        await uploadString(imageRef,selectedFile,'data_url')
-        const downloadURL = await getDownloadURL(imageRef)
+      if (selectedFile) {
+        // store in storage => getDownloadURL (return imageURL)
+        const imageRef = ref(storage, `posts/${postDocRef.id}/image`);
+        await uploadString(imageRef, selectedFile, "data_url");
+        const downloadURL = await getDownloadURL(imageRef);
         // update post doc by adding URL
-        await updateDoc(postDocRef,{
-          imageURL: downloadURL
-        })
+        await updateDoc(postDocRef, {
+          imageURL: downloadURL,
+        });
       }
-    // redirect the user back to the community page
-      router.back()
+      // redirect the user back to the community page
+      router.back();
     } catch (error: any) {
-      console.log('handleCreatePost error', error.message)
-      setError(true)
+      console.log("handleCreatePost error", error.message);
+      setError(true);
     }
-    setLoading(false)    
+    setLoading(false);
   };
 
   const onSelectImage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -138,14 +151,12 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
         )}
       </Flex>
       {error && (
-        <Alert status='error'>
-        <AlertIcon />
-        <Text>Error creating post</Text>
-        
-      </Alert>
+        <Alert status="error">
+          <AlertIcon />
+          <Text>Error creating post</Text>
+        </Alert>
       )}
     </Flex>
   );
 };
 export default NewPostForm;
-
