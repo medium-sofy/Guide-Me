@@ -7,23 +7,29 @@ import React from "react";
 import NotFound from "@/components/Community/NotFound";
 import Header from "@/components/Community/Header";
 import PageContent from "@/components/Layout/PageContent";
+import CreatePostLink from "@/components/Community/CreatePostLink";
+import Posts from "@/components/Posts/Posts";
 
 type CommunityPageProps = {
   communityData: Community;
 };
 
 const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
-
-  if(!communityData){
-    return <NotFound/>
+  if (!communityData) {
+    return <NotFound />;
   }
   return (
     <>
-    <Header communityData={communityData} />
-    <PageContent>
-      <><div>LHS</div></>
-      <><div>RHS</div></>
-    </PageContent>
+      <Header communityData={communityData} />
+      <PageContent>
+        <>
+          <CreatePostLink/>
+          <Posts communityData={communityData}/>
+        </>
+        <>
+          <div>RHS</div>
+        </>
+      </PageContent>
     </>
   );
 };
