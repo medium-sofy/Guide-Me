@@ -190,8 +190,8 @@ const Comments: React.FC<CommentsProps> = ({
               </Flex>
             ) : (
               <>
-                {comments.map((comment) => (
-                  <CommentItem
+                {comments.map((comment, index) => (
+                  <CommentItem key={index}
                     comment={comment}
                     onDeleteComment={onDeleteComment}
                     loadingDelete={loadingDeleteId === comment.id}

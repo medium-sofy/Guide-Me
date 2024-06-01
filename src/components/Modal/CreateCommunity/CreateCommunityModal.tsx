@@ -136,7 +136,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
                 Name
               </Text>
               <Text fontSize={11} color="gray.500">
-                Community names including capitalization canno't be changed
+                Community names including capitalization cannot be changed
               </Text>
               <Text
                 position="relative"

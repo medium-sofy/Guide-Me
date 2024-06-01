@@ -12,13 +12,15 @@ const OAuthButtons:React.FC = () => {
     await setDoc(userDocRef,
       JSON.parse(JSON.stringify(user))
     );
-
-    useEffect(()=>{
-      if(userCred){
-        createUserDocument(userCred.user)
-      }
-    }, [userCred])
+   
   };
+
+  useEffect(()=>{
+    if(userCred){
+      createUserDocument(userCred.user)
+    }
+  }, [userCred])
+  
   return(
     <Flex direction='column' width='100%'>
       <Button variant='oauth' mb={2} isLoading={loading} onClick={()=>signInWithGoogle()}>
