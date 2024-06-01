@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="199.72484mm"
+   height="35.313057mm"
+   viewBox="0 0 199.72484 35.313057"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="guidemetext.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.5"
+     inkscape:cx="-200"
+     inkscape:cy="78"
+     inkscape:window-width="1920"
+     inkscape:window-height="1013"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:snap-bbox="true"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs2">
+    <rect
+       x="126.49511"
+       y="440.12228"
+       width="41.333019"
+       height="110.46603"
+       id="rect53673" />
+    <rect
+       x="119.58711"
+       y="395.68402"
+       width="20.661993"
+       height="123.28048"
+       id="rect43047" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-4.0531114,-101.04535)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:45.8611px;line-height:1.25;font-family:sans-serif;white-space:pre;inline-size:236.456;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="51.1035"
+       y="117.74642"
+       id="text2145"
+       transform="translate(-49.022432,18.199235)"><tspan
+         x="51.1035"
+         y="117.74642"
+         id="tspan55399"><tspan
+           style="font-family:Poppins;-inkscape-font-specification:Poppins"
+           id="tspan55397">GuideMe</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text43045"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect43047);fill:#000000;fill-opacity:1;stroke:none" />
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text53671"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect53673);fill:#000000;fill-opacity:1;stroke:none" />
+  </g>
+</svg>
