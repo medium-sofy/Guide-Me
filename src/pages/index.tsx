@@ -49,7 +49,7 @@ export default function Home() {
         const postQuery = query(
           collection(firestore, "posts"),
           where("communityId", "in", myCommunityIds),
-          limit(10)
+          // add limit here: limit(num)
         );
 
         const postDocs = await getDocs(postQuery);
@@ -77,7 +77,8 @@ export default function Home() {
       const postQuery = query(
         collection(firestore, "posts"),
         orderBy("voteStatus", "desc"),
-        limit(10)
+        // add limit here : limit(num)
+        
       );
 
       const postDocs = await getDocs(postQuery);
