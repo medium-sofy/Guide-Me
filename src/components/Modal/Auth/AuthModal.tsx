@@ -40,8 +40,8 @@ const AuthModal: React.FC = () => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader textAlign="center">
-            {modalState.view === "login" && "Login"}
-            {modalState.view === "signup" && "Signup"}
+            {modalState.view === "login" && "Log In"}
+            {modalState.view === "signup" && "Sign Up"}
             {modalState.view === "resetPassword" && "Reset Password"}
           </ModalHeader>
           <ModalCloseButton />
