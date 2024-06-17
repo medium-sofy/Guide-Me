@@ -62,6 +62,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
   const { selectedFile, setSelectedFile, onSelectFile } = useSelectFile();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  
   const handleCreatePost = async () => {
     const { communityId } = router.query;
     // create new post object => type post

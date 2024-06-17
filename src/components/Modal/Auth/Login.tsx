@@ -19,8 +19,10 @@ const Login: React.FC<LoginProps> = () => {
     useSignInWithEmailAndPassword(auth);
 
   // Firebase logic
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSignInFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    // Prevent the browser from refreshing the page
     event.preventDefault();
+    // Use React-Firebase-Hooks method to sign the user in using email and password
     signInWithEmailAndPassword(loginForm.email, loginForm.password);
   };
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +33,7 @@ const Login: React.FC<LoginProps> = () => {
     }));
   };
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSignInFormSubmit}>
       <Input
         name="email"
         placeholder="email"
