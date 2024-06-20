@@ -16,6 +16,7 @@
     "@emotion/styled": "^11.11.5",
     "@fontsource/open-sans": "^5.0.27",
     "@fontsource/raleway": "^5.0.17",
+    "bad-words": "^3.0.4",
     "firebase": "^10.10.0",
     "framer-motion": "^11.0.25",
     "moment": "^2.30.1",

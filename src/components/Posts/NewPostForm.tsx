@@ -62,15 +62,47 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
   const { selectedFile, setSelectedFile, onSelectFile } = useSelectFile();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  
+  const [profanityError, setProfanityError] = useState(false);
+
+  const Filter = require("bad-words");
+  const filter = new Filter();
+  const arabicInsults = ["خخخخ", "احا", "تبا", "اللعنة"];
+
   const handleCreatePost = async () => {
+    // can add the text of both title and body fields to a single array 
+    //and loop through that to save a for loop
+    for (const word of textInputs.title.split(" ")) {
+      if (arabicInsults.includes(word)) {
+        setProfanityError(true);
+        setLoading(false);
+        return;
+        // Exit the loop if profanity is found
+      }
+    }
+
+    for (const word of textInputs.body.split(" ")) {
+      if (arabicInsults.includes(word)) {
+        setProfanityError(true);
+        setLoading(false);
+        return;
+        // Exit the loop if profanity is found
+      }
+    }
+
+    if(filter.isProfane(textInputs.title) || filter.isProfane(textInputs.body)){
+      setProfanityError(true);
+        setLoading(false);
+        return;
+    }
     const { communityId } = router.query;
-    // create new post object => type post
+    // create new post object => type post3
     const newPost: Post = {
       communityId: communityId as string,
       communityImageURL: communityImageURL || "",
       creatorId: user?.uid,
       creatorsDisplayName: user.email!.split("@")[0],
+      // title: textInputs.title ? filter.clean(textInputs.title) : textInputs.title,
+      // body: textInputs.body ? filter.clean(textInputs.body) : textInputs.body,
       title: textInputs.title,
       body: textInputs.body,
       numberOfComments: 0,
@@ -81,6 +113,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
     setLoading(true);
     try {
       // store the post on db
+
       const postDocRef = await addDoc(collection(firestore, "posts"), newPost);
       // check for selected file
       if (selectedFile) {
@@ -101,7 +134,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
     }
     setLoading(false);
   };
-
+  console.log(profanityError)
   const onTextChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -147,6 +180,18 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
         <Alert status="error">
           <AlertIcon />
           <Text>Error creating post</Text>
+        </Alert>
+      )}
+
+      {/* // need to display the bad words error based on error.message, set it at the top.
+    // Create another error with the message: Error creating post, Please remove any inappropriate words. */}
+
+      {profanityError && (
+        <Alert status="error">
+          <AlertIcon />
+          <Text>
+            Error creating post, Please remove any inappropriate words.
+          </Text>
         </Alert>
       )}
     </Flex>
