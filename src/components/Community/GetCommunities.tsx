@@ -14,22 +14,21 @@ import {
 } from "@chakra-ui/react";
 import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { FaReddit } from "react-icons/fa";
 
-const Recommendations: React.FC = () => {
+const GetCommunities: React.FC = () => {
   const [communities, setCommunites] = useState<Community[]>([]);
   const [loading, setLoading] = useState(false);
   const { communityStateValue, onJoinOrLeaveCommunity } = useCommunityData();
-  const router = useRouter()
-  const getCommunityRecommendations = async () => {
+
+  const getAllCommunities = async () => {
     setLoading(true);
     try {
       const communityQuery = query(
         collection(firestore, "communities"),
         orderBy("numberOfMembers", "desc"),
-        limit(5)
+        // add limit here: limit(5)
       );
 
       const communityDocs = await getDocs(communityQuery);
@@ -40,13 +39,13 @@ const Recommendations: React.FC = () => {
 
       setCommunites(communities as Community[]);
     } catch (error) {
-      console.log("getCommunityRecommendations error", error);
+      console.log("getAllCommunities error", error);
     }
     setLoading(false);
   };
 
   useEffect(() => {
-    getCommunityRecommendations();
+    getAllCommunities();
   }, []);
 
   return (
@@ -68,7 +67,7 @@ const Recommendations: React.FC = () => {
         borderRadius="4px 4px 0px 0px"
         fontWeight={700}
       >
-        <Text color="white.400">Top Communities</Text>
+        <Text color="white.400">All Communities</Text>
       </Flex>
       {/* Top communities list items */}
       <Flex direction="column">
@@ -152,13 +151,13 @@ const Recommendations: React.FC = () => {
                 </Link>
               );
             })}
-            <Box p='10px 20px'>
-                <Button onClick={()=>{router.push(`/communities`)}} height='30px' width='100%'>View All</Button>
-            </Box>
+            {/* <Box p='10px 20px'>
+                <Button height='30px' width='100%'>View All</Button>
+            </Box> */}
           </>
         )}
       </Flex>
     </Flex>
   );
 };
-export default Recommendations;
+export default GetCommunities;
