@@ -224,14 +224,14 @@ const PostItem: React.FC<PostItemProps> = ({
             cursor="pointer"
             onClick={handleDelete}
           >
-            {loadingDelete ? (
+            {userIsCreator? loadingDelete ? (
               <Spinner size="sm" />
             ) : (
               <>
                 <Icon as={AiOutlineDelete} mr={2} />
                 <Text fontSize="9pt">Delete</Text>
               </>
-            )}
+            ) : ""}
           </Flex>
         </Flex>
       </Flex>
