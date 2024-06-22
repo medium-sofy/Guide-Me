@@ -60,10 +60,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
                   <Text fontWeight={700}>
                     {user?.displayName || user.email?.split("@")[0]}
                   </Text>
-                  <Flex align="center">
+                  {/* <Flex align="center">
                     <Icon as={IoSparkles} color="brand.100" mr={1} />
                     <Text color="gray.400">1 Points</Text>
-                  </Flex>
+                  </Flex> */}
                 </Flex>
               </>
             ) : (
