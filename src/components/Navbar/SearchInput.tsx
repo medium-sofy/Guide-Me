@@ -1,3 +1,4 @@
+import { searchTermState } from "@/atoms/searchState";
 import { PhoneIcon, SearchIcon } from "@chakra-ui/icons";
 import {
   Input,
@@ -8,12 +9,20 @@ import {
 import { Flex } from "@chakra-ui/layout";
 import { User } from "firebase/auth";
 import React from "react";
+import { useRecoilState } from "recoil";
 
 type SearchInputProps = {
   user?: User | null ;
 };
 
-const SearchInput: React.FC<SearchInputProps> = ({ user }) => (
+const SearchInput: React.FC<SearchInputProps> = ({ user }) =>{ 
+  const [searchTerm, setSearchTerm] = useRecoilState(searchTermState)
+  
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+  console.log(searchTerm)
+  return (
   <Flex flexGrow={1} maxWidth={user ? "auto" : "600px"} mr={2} align="center">
     <InputGroup>
       <InputLeftElement
@@ -25,7 +34,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ user }) => (
       <Input
         type="tel"
         placeholder="Search Guide Me"
-        fontSize="10px"
+        fontSize="14px"
         _placeholder={{ color: "gray.500" }}
         _hover={{
           bg: "white",
@@ -39,8 +48,10 @@ const SearchInput: React.FC<SearchInputProps> = ({ user }) => (
         }}
         height="34px"
         bg="gray.50"
+        value={searchTerm}
+        onChange={handleSearchChange}
       />
     </InputGroup>
   </Flex>
-);
+);}
 export default SearchInput;

@@ -8,6 +8,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import PostItem from "./PostItem";
 import { Stack } from "@chakra-ui/react";
 import PostLoader from "./PostLoader";
+import { useRecoilValue } from "recoil";
+import { searchTermState } from "@/atoms/searchState";
 
 type PostsProps = {
   communityData: Community;
@@ -24,6 +26,7 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
     onDeletePost,
   onSelectPost
   } = usePosts();
+  const searchTerm = useRecoilValue(searchTermState)
   const getPosts = async () => {
     try {
       setLoading(true);
@@ -56,7 +59,9 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
         <PostLoader />
       ) : (
         <>
-          {postStateValue.posts.map((item) => (
+          {postStateValue.posts.filter((post)=>{
+            return searchTerm.toLowerCase() === '' ? post : post.title.toLowerCase().includes(searchTerm)
+          }).map((item) => (
             <PostItem
               key={item.id}
               post={item}

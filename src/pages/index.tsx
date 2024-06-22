@@ -22,6 +22,7 @@ import { communityState } from "@/atoms/communitiesAtom";
 import { useRecoilValue } from "recoil";
 import useCommunityData from "@/hooks/useCommunityData";
 import Recommendations from "@/components/Community/Recommendations";
+import { SearchTerm, searchTermState } from "@/atoms/searchState";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,7 +37,7 @@ export default function Home() {
     onVote,
   } = usePosts();
   const { communityStateValue } = useCommunityData();
-
+  const searchTerm = useRecoilValue(searchTermState)
   const buildUserHomeFeed = async () => {
     setLoading(true);
 
@@ -146,7 +147,9 @@ export default function Home() {
           <PostLoader />
         ) : (
           <Stack>
-            {postStateValue.posts.map((post) => (
+            {postStateValue.posts.filter((post)=>{
+              return searchTerm.toLowerCase() === '' ? post : post.title.toLowerCase().includes(searchTerm)
+            }).map((post) => (
               <PostItem
                 key={post.id}
                 post={post}
