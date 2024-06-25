@@ -32,7 +32,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ user }) =>{
       </InputLeftElement>
 
       <Input
-        type="tel"
+        type="text"
         placeholder="Search Guide Me"
         fontSize="14px"
         _placeholder={{ color: "gray.500" }}
