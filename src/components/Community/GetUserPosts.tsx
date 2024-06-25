@@ -59,7 +59,7 @@ const GetUserPosts: React.FC = () => {
   return (
     <>
       {/* <CreatePostLink /> */}
-      <Text fontSize='12pt' mb={3} paddingLeft = '38px'fontWeight='bold'>{user ? `Hey, ${user?.displayName}` : 'User Activity'}</Text>
+      <Text fontSize='12pt' mb={3} paddingLeft = '38px'fontWeight='bold'>User Activity</Text>
       {loading ? (
         <PostLoader />
       ) : (
