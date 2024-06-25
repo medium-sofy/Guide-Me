@@ -66,7 +66,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({
 
   const Filter = require("bad-words");
   const filter = new Filter();
-  const arabicInsults = ["خخخخ", "احا", "تبا", "اللعنة"];
+  const arabicInsults = ["خخخخ", "احا", "تبا", "اللعنة","اللعنه","أحا","خخ","خخح","سحقا"];
 
   const handleCreatePost = async () => {
     // can add the text of both title and body fields to a single array 
