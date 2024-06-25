@@ -21,6 +21,7 @@ import { useResetRecoilState, useSetRecoilState } from "recoil";
 import { authModalState } from "@/atoms/authModalAtom";
 import { IoSparkles } from "react-icons/io5";
 import { communityState } from "@/atoms/communitiesAtom";
+import { useRouter } from "next/router";
 
 type UserMenuProps = {
   user?: User | null;
@@ -32,6 +33,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
     await signOut(auth);
      // clear community state
   }
+  const router = useRouter()
   return (
     <Menu>
       <MenuButton
@@ -81,6 +83,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
               fontSize="10pt"
               fontWeight={700}
               _hover={{ bg: "blue.500", color: "white" }}
+              onClick={()=>{router.push('/profile')}}
             >
               <Flex align="center">
                 <Icon fontSize={20} mr={2} as={CgProfile} />
